@@ -33,6 +33,12 @@
             };
         };
 
+        var windowHeight = function() {
+            return "innerHeight" in window
+                ? window.innerHeight
+                : document.documentElement.offsetHeight;
+        };
+
         return this.each(function() {
             var element = $(this),
                 loadedPages = 1;
@@ -72,7 +78,7 @@
                 var win = $(window),
                     doc = $(document);
                 win.scroll(function(){
-                    if (doc.height() - win.height() -
+                    if (doc.height() - windowHeight() -
                         win.scrollTop() <= settings.paginateOnScrollMargin) {
                         // Do not paginate on scroll if chunks are used and
                         // the current chunk is complete.
